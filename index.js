@@ -6,6 +6,7 @@ const companyRoutes = require('./routes/companyRoutes.js');
 const { notFound, errorHandler } = require('./middleware/error.js');
 const multer = require('multer');
 const cors = require('cors');
+const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 const shortid = require('shortid')
 const Razorpay = require('razorpay')
 const bodyParser = require('body-parser')
@@ -86,7 +87,7 @@ app.post('/verification', (req, res) => {
         console.log(req.body);
         console.log(req.body['payload']['payment']);
         console.log('request is legit')
-        // require('fs').writeFileSync('payment1.json', JSON.stringify(req.body, null, 4))
+        require('fs').writeFileSync('payment1.json', JSON.stringify(req.body, null, 4))
     } else {
         // pass it
     }
@@ -139,6 +140,47 @@ function sendmail(to, subject, html) {
             console.error(error)
         })
 }
+
+app.get("/payment-success", (req, res) => {
+    require('fs').writeFileSync('payment1.json', JSON.stringify(req.body, null, 4))
+    res.json({ status: 'ok' })
+})
+
+app.get("/create-link", (req, res) => {
+    fetch("https://api.razorpay.com/v1/payment_links/", {
+        body: JSON.stringify({
+            "upi_link": "true",
+            "amount": 100,
+            "currency": "INR",
+            "accept_partial": false,
+            "expire_by": 1691097057,
+            "reference_id": shortid.generate(),
+            "description": "Payment for policy no #23456",
+            "customer": {
+                "name": "Subramanya G",
+                "contact": "+919482117332",
+                "email": "subramanyag9112@gmail.com"
+            },
+            "notify": {
+                "sms": true,
+                "email": true
+            },
+            "reminder_enable": true,
+            "notes": {
+                "policy_name": "Jeevan Bima"
+            },
+        }),
+        headers: {
+            "Authorization": 'Basic cnpwX2xpdmVfeUlBWlk2VG5iZk9TV0M6d2ZmNGlCT0I4ZGp2YXZnNEJtQ3U5cVFq',
+            "Content-Type": "application/json"
+        },
+        method: "POST"
+    })
+        .then(res => res.json())
+        .then(resp => {
+            res.json({ message: resp });
+        });
+});
 
 // fallback for 404 error (using after all routes)
 app.use(notFound)

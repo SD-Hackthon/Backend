@@ -8,39 +8,29 @@
     "payload": {
         "payment": {
             "entity": {
-                "id": "pay_HsW2ImPVIPqUVV",
+                "id": "pay_HsYNoPc5iaAn9r",
                 "entity": "payment",
-                "amount": 49900,
+                "amount": 100,
                 "currency": "INR",
                 "status": "captured",
-                "order_id": "order_HsW1zfX2k3RxTt",
+                "order_id": "order_HsYNh6mBILnXlw",
                 "invoice_id": null,
                 "international": false,
-                "method": "card",
+                "method": "upi",
                 "amount_refunded": 0,
                 "refund_status": null,
                 "captured": true,
-                "description": "Thank you for nothing. Please give us some money",
-                "card_id": "card_HsW2Ion6yxqzHd",
-                "card": {
-                    "id": "card_HsW2Ion6yxqzHd",
-                    "entity": "card",
-                    "name": "Subramanya G",
-                    "last4": "1111",
-                    "network": "Visa",
-                    "type": "debit",
-                    "issuer": null,
-                    "international": false,
-                    "emi": false,
-                    "sub_type": "consumer"
-                },
+                "description": "#HsYNdGeeVTxeXd",
+                "card_id": null,
                 "bank": null,
                 "wallet": null,
-                "vpa": null,
+                "vpa": "subramanyag9112@okhdfcbank",
                 "email": "subramanyag9112@gmail.com",
                 "contact": "+919482117332",
-                "notes": [],
-                "fee": 998,
+                "notes": {
+                    "policy_name": "Jeevan Bima"
+                },
+                "fee": 2,
                 "tax": 0,
                 "error_code": null,
                 "error_description": null,
@@ -48,11 +38,11 @@
                 "error_step": null,
                 "error_reason": null,
                 "acquirer_data": {
-                    "auth_code": "677454"
+                    "rrn": "124587020862"
                 },
-                "created_at": 1630568059
+                "created_at": 1630576325
             }
         }
     },
-    "created_at": 1630568061
+    "created_at": 1630576345
 }
