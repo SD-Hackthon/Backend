@@ -5,7 +5,7 @@ const userRoutes = require('./routes/userRoutes.js');
 const companyRoutes = require('./routes/companyRoutes.js');
 const { notFound, errorHandler } = require('./middleware/error.js');
 const multer = require('multer');
-const cors = require('cors');
+// const cors = require('cors');
 // const bodyParser = require('body-parser');
 
 

@@ -167,16 +167,16 @@ const createInvoice = asyncHandler(async (req, res) => {
         },
         path: './docs/' + filename
     }
-    const tmp = await pdf.create(document, options)
-
-    if(!tmp){
-        res.status(404)
-        throw new Error('document not created')
-    }
+    pdf.create(document, options)
+        .then(res => {
+            console.log(res);
+        }).catch(error => {
+            console.log(error);
+        })
 
     const invoice = await Invoice.create({
         from: company.name,
-        to: email,
+        to: user[0]._id,
         amount: grandtotal,
         isPaid: false,
         paidToEmail: company.paidToEmail,
@@ -216,9 +216,23 @@ const getInvoice = asyncHandler(async (req, res) => {
     file.pipe(res);
 })
 
+const getAllInvoices = asyncHandler(async (req, res) => {
+    const invoices = await Invoice.find({ to: req.params.id })
+
+    if(invoices){
+        res.status('200').json({
+            invoices: invoices
+        })
+    } else {
+        res.status(404)
+        throw new Error('Invoice not found')
+    }
+})
+
 module.exports = {
     createCompany,
     createProduct,
     createInvoice,
-    getInvoice
+    getInvoice,
+    getAllInvoices
 }

@@ -7,7 +7,8 @@ var invoiceSchema = new mongoose.Schema(
       required: true
     },
     to: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
         required: true
     },
     // orderId: {
